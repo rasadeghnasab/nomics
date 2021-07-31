@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Laravel\Passport\Passport;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -37,8 +38,10 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
-        $this->routes(function () {
-            Route::prefix('api')
+        $apisV1Prefix = 'api/v1';
+
+        $this->routes(function () use ($apisV1Prefix) {
+            Route::prefix($apisV1Prefix)
                 ->middleware('api')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
@@ -47,6 +50,15 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
+
+        if (! $this->app->routesAreCached()) {
+            Passport::routes(
+                function($router){
+                    $router->forAccessTokens();
+            },
+                ['prefix' => sprintf('%s/oauth', $apisV1Prefix)]
+            );
+        }
     }
 
     /**
