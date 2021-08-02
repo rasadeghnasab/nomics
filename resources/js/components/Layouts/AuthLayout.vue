@@ -2,7 +2,7 @@
 	<v-app>
         <v-content>
             <v-container>
-                <router-view></router-view>
+                <h2>auth</h2>
             </v-container>
         </v-content>
     </v-app>

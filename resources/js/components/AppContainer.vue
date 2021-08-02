@@ -1,13 +1,6 @@
 <template>
 <!-- App.vue -->
-
-    <v-app>
-    <v-navigation-drawer app>
-        <!-- -->
-        <v-card app>
-    <v-navigation-drawer>
-      <v-list
-        dense
+<v-app> <v-navigation-drawer app> <!-- --> <v-list dense
         nav
       >
         <v-list-item
@@ -25,28 +18,16 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-  </v-card>
-    </v-navigation-drawer>
-
-    <v-app-bar app>
-        <h1>app bar</h1>
-        <!-- -->
-    </v-app-bar>
 
     <!-- Sizes your content based upon application components -->
     <v-main>
 
         <!-- Provides the application the proper gutter -->
         <v-container fluid>
-
-        <!-- If using vue-router -->
-        <router-view></router-view>
+            <router-view></router-view>
         </v-container>
     </v-main>
 
-    <v-footer app>
-        <!-- -->
-    </v-footer>
     </v-app>
 </template>
 
@@ -55,8 +36,8 @@
         data () {
             return {
                 items: [
-                    { title: 'Login', icon: 'mdi-view-dashboard', 'to': '/auth/login' },
-                    { title: 'Register', icon: 'mdi-view-dashboard', 'to': '/auth/register' },
+                    { title: 'Login', icon: 'far fa-eye', 'to': '/login' },
+                    { title: 'Register', icon: 'mdi-view-dashboard', 'to': '/register' },
                 ],
                 right: null,
             }

@@ -1,72 +1,73 @@
 <template>
-  <v-layout align-center justify-center>
-    <v-flex xs12 sm8 md4>
-      <v-card class="elevation-12">
-        <v-toolbar dark color="primary">
-            <v-toolbar-title>Login</v-toolbar-title>
-        </v-toolbar>
-        <v-card-text>
-          <form id="login_form" method="POST" action="/login" aria-label="Login">
-            
-            <input type="hidden" name="_token" :value="csrf_token">
-            
-            <v-layout row>
-              <v-flex xs12>
-                <v-text-field
-                  v-model="email"
-                  v-validate="'required|max:255'"
-                  data-vv-name="email"
-                  :error-messages="errors.collect('email')"
-                  label="Email"
-                  name="email"></v-text-field>
-              </v-flex>
+    <main>
+        <v-container fluid fill-height class="loginOverlay">
+            <v-layout flex align-center justify-center>
+                <v-flex xs12 sm4 elevation-6>
+                    <v-toolbar class="pt-5 blue darken-4">
+                        <v-toolbar-title class="white--text"><h4>Login</h4></v-toolbar-title>
+                        <v-toolbar-items/>
+                    </v-toolbar>
+                    <v-card>
+                        <v-card-text class="pt-4">
+                            <div>
+                                <v-form v-model="valid" ref="form">
+                                    <v-text-field
+                                        label="Enter your e-mail address"
+                                        v-model="email"
+                                        :rules="emailRules"
+                                        required
+                                    ></v-text-field>
+                                    <v-text-field
+                                        label="Enter your password"
+                                        v-model="password"
+                                        min="8"
+                                        :append-icon="e1 ? 'fas fa-eye-slash': 'fas fa-eye'"
+                                        :append-icon-cb="() => (e1 = !e1)"
+                                        :type="e1 ? 'password' : 'text'"
+                                        :rules="passwordRules"
+                                        counter
+                                        required
+                                    ></v-text-field>
+                                    <v-layout justify-space-between>
+                                        <v-btn @click="submit" :class=" { 'blue darken-4 white--text' : valid, disabled: !valid }">Login</v-btn>
+                                        <a href="">Forgot Password</a>
+                                    </v-layout>
+                                </v-form>
+                            </div>
+                        </v-card-text>
+                    </v-card>
+                </v-flex>
             </v-layout>
-            <v-layout row>
-              <v-flex xs12>
-                <v-text-field
-                  v-model="password"
-                  v-validate="'required|min:6'"
-                  data-vv-name="password"
-                  :error-messages="errors.collect('password')"
-                  label="Password"
-                  name="password"
-                  type="password"></v-text-field>
-              </v-flex>
-            </v-layout>
-
-            <v-btn color="primary" @click="validate">Login</v-btn>
-            <router-link :to="{name: 'auth.email'}">Forgot Password?</router-link>
-          </form>
-        </v-card-text>
-      </v-card>
-    </v-flex>
-  </v-layout>
+        </v-container>
+    </main>
 </template>
 
 <script>
-
-  export default {
-    inject: ['$validator'],
-    data: () => ({
-      email: '',
-      password: ''
-    }),
-    computed: {
-      csrf_token() {
-        let token = document.head.querySelector('meta[name="csrf-token"]')
-        return token.content
-      }
-    },
-    methods: {
-      validate() {
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            
-            //Manually submit form if not errors
-            document.getElementById("login_form").submit()
-          }
-        })
-      }
+    export default {
+        data () {
+            return {
+                valid: false,
+                e1: false,
+                password: '',
+                passwordRules: [
+                    (v) => !!v || 'Password is required',
+                ],
+                email: '',
+                emailRules: [
+                    (v) => !!v || 'E-mail is required',
+                    (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+                ],
+            }
+        },
+        methods: {
+            submit () {
+                if (this.$refs.form.validate()) {
+                    this.$refs.form.$el.submit()
+                }
+            },
+            clear () {
+                this.$refs.form.reset()
+            }
+        },
     }
-  }
 </script>
