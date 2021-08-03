@@ -23,8 +23,8 @@ class AuthController extends Controller
                 'grant_type' => 'password',
                 'client_id' => config('services.passport.client_id'),
                 'client_secret' => config('services.passport.client_secret'),
-                'username' => $request->username,
-                'password' => $request->password,
+                'username' => $request->get('username'),
+                'password' => $request->get('password'),
             ]);
             $tokenRequest = Request::create(
                 sprintf('%s/api/v1/oauth/token', env('APP_URL')),
