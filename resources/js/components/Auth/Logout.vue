@@ -17,9 +17,9 @@ export default {
             await this.$router.push({path: '/login'});
             this.$bus.$emit('logged', 'User logged out')
 
-            alert(response.data.message);
+            this.$toaster.success(response.data.message)
         } catch (error) {
-            alert('failed to logout: ' + error);
+            this.$toaster.success(error.response.message);
         }
     }
 }

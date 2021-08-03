@@ -74,10 +74,11 @@ export default {
 
                 auth.saveAuthorizedUser(response.data.access_token);
                 this.$bus.$emit('logged', 'User logged in')
+                this.$router.push({path: '/'});
 
-                await this.$router.push({path: '/'});
+                this.$toaster.success('You logged in successfully.')
             } catch (error) {
-                alert(error.response.data.message);
+                this.$toaster.error(error.response.data.message);
             }
         },
         clear() {

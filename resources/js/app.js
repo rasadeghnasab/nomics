@@ -12,10 +12,12 @@ import Vue from 'vue';
 import Vuetify from '../plugins/vuetify';
 import VueRouter from 'vue-router'
 import EventBus from 'vue';
+import Toaster from 'v-toaster'
 
 import AppContainer from './components/AppContainer.vue';
 import routes from './routes.js'
 
+import 'v-toaster/dist/v-toaster.css'
 
 /**
  * The following block of code may be used to automatically register your
@@ -31,6 +33,7 @@ import routes from './routes.js'
 // Vue.component('app-container', require('./components/AppContainer.vue').default);
 
 Vue.use(VueRouter);
+Vue.use(Toaster, {timeout: 3000});
 Vue.prototype.$bus = new EventBus();
 
 //Router configuration
