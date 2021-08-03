@@ -30,9 +30,8 @@ class AuthController extends Controller
                 sprintf('%s/api/v1/oauth/token', env('APP_URL')),
                 'post'
             );
-            $response = Route::dispatch($tokenRequest);
 
-            return $response;
+            return Route::dispatch($tokenRequest);
         } catch (BadResponseException $exception) {
             if ($exception->getCode() === 400) {
                 return response()->json([
