@@ -1,19 +1,38 @@
-
 export default {
     login(data) {
         return axios.post('login', data);
     },
 
-	register(data) {
-		return axios.post('register', data)
-	},
+    saveAuthorizedUser(token) {
+        localStorage.setItem('token', token);
+    },
 
-	emailLink(data) {
-		return axios.post('password/email', data)
-	},
+    logout() {
+        this.authenticateTheRequest();
 
-	resetPassword(data) {
-		return axios.post('password/reset', data)
-	},
+        console.log('get token', localStorage.getItem('token'))
+
+        return axios.post('logout');
+    },
+
+    clearAuthorizedUser() {
+        localStorage.removeItem('token');
+    },
+
+    authenticated() {
+        return localStorage.getItem('token') != null;
+    },
+
+    authenticateTheRequest() {
+        axios.interceptors.request.use((config) => {
+            const token = localStorage.getItem('token');
+
+            if (this.authenticated()) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+
+            return config;
+        });
+    }
 
 }

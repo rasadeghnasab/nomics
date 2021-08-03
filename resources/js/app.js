@@ -11,6 +11,7 @@ window.Vue = require('vue').default;
 import Vue from 'vue';
 import Vuetify from '../plugins/vuetify';
 import VueRouter from 'vue-router'
+import EventBus from 'vue';
 
 import AppContainer from './components/AppContainer.vue';
 import routes from './routes.js'
@@ -30,11 +31,12 @@ import routes from './routes.js'
 // Vue.component('app-container', require('./components/AppContainer.vue').default);
 
 Vue.use(VueRouter);
+Vue.prototype.$bus = new EventBus();
 
 //Router configuration
 const router = new VueRouter({
   mode: 'history',
-  routes 
+  routes
 })
 
 /**

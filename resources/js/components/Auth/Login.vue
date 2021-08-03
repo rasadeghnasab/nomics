@@ -27,7 +27,9 @@
                                         required
                                     ></v-text-field>
                                     <v-layout justify-space-between>
-                                        <v-btn type="submit" @click="submit" :disabled="!valid" form="form" class="primary">Login</v-btn>
+                                        <v-btn type="submit" @click="submit" :disabled="!valid" form="form"
+                                               class="primary">Login
+                                        </v-btn>
                                     </v-layout>
                                 </v-form>
                             </div>
@@ -40,41 +42,47 @@
 </template>
 
 <script>
-    import auth from '../../api/auth.js';
+import auth from '../../api/auth.js';
 
-    export default {
-        data () {
-            return {
-                valid: false,
-                e1: true,
-                password: '',
-                passwordRules: [
-                    (v) => !!v || 'Password is required',
-                ],
-                email: '',
-                emailRules: [
-                    (v) => !!v || 'E-mail is required',
-                    (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-                ],
+export default {
+    data() {
+        return {
+            valid: false,
+            e1: true,
+            password: '',
+            passwordRules: [
+                (v) => !!v || 'Password is required',
+            ],
+            email: '',
+            emailRules: [
+                (v) => !!v || 'E-mail is required',
+                (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+            ],
+        }
+    },
+    methods: {
+        async submit() {
+            if (!this.$refs.form.validate()) {
+                return;
             }
-        },
-        methods: {
-            async submit () {
-                if (!this.$refs.form.validate()) {
-                    return;
-                }
 
+            try {
                 const response = await auth.login({
-                    email: this.email,
+                    username: this.email,
                     password: this.password
-                });
+                })
 
-                alert('response');
-                console.log(response)
-            },
-            clear () {
-                this.$refs.form.reset()
+                auth.saveAuthorizedUser(response.data.access_token);
+                this.$bus.$emit('logged', 'User logged in')
+
+                await this.$router.push({path: '/'});
+            } catch (error) {
+                alert(error.response.data.message);
             }
         },
-    }
+        clear() {
+            this.$refs.form.reset()
+        }
+    },
+}
 </script>

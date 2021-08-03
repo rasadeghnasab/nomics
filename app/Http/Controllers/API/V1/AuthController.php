@@ -18,6 +18,11 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $errorMessages = [
+            400 => 'Invalid Request. Please enter a username or a password.',
+            401 => 'Your credentials are incorrect. Please try again'
+        ];
+
         try {
             $request->request->add([
                 'grant_type' => 'password',
@@ -33,19 +38,9 @@ class AuthController extends Controller
 
             return Route::dispatch($tokenRequest);
         } catch (BadResponseException $exception) {
-            if ($exception->getCode() === 400) {
-                return response()->json([
-                    'message' => 'Invalid Request. Please enter a username or a password.'
-                ], $exception->getCode());
-            } else if ($exception->getCode() === 401) {
-                return response()->json([
-                    'message' => 'Your credentials are incorrect. Please try again'
-                ], $exception->getCode());
-            }
+            $message = $errorMessages[$exception->getCode()] ?? 'Something went wrong on the server.';
 
-            return response()->json([
-                'message' => 'Something went wrong on the server.'
-            ], $exception->getCode());
+            return response()->json(['message' => $message], $exception->getCode());
         }
     }
 
