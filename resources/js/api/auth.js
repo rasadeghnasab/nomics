@@ -8,10 +8,6 @@ export default {
     },
 
     logout() {
-        this.authenticateTheRequest();
-
-        console.log('get token', localStorage.getItem('token'))
-
         return axios.post('logout');
     },
 
@@ -22,17 +18,4 @@ export default {
     authenticated() {
         return localStorage.getItem('token') != null;
     },
-
-    authenticateTheRequest() {
-        axios.interceptors.request.use((config) => {
-            const token = localStorage.getItem('token');
-
-            if (this.authenticated()) {
-                config.headers.Authorization = `Bearer ${token}`;
-            }
-
-            return config;
-        });
-    }
-
 }

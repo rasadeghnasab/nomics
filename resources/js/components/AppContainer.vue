@@ -1,10 +1,8 @@
 <template>
     <!-- App.vue -->
-    <v-app>
+    <v-app class="p-4">
         <v-navigation-drawer app> <!-- -->
-            <v-list dense
-                    nav
-            >
+            <v-list dense nav>
                 <v-list-item
                     v-for="item in items"
                     :key="item.title"
@@ -23,7 +21,6 @@
 
         <!-- Sizes your content based upon application components -->
         <v-main>
-
             <!-- Provides the application the proper gutter -->
             <v-container fluid>
                 <router-view></router-view>

@@ -15,7 +15,7 @@ import EventBus from 'vue';
 import Toaster from 'v-toaster'
 
 import AppContainer from './components/AppContainer.vue';
-import routes from './routes.js'
+import router from './routes.js'
 
 import 'v-toaster/dist/v-toaster.css'
 
@@ -35,12 +35,6 @@ import 'v-toaster/dist/v-toaster.css'
 Vue.use(VueRouter);
 Vue.use(Toaster, {timeout: 3000});
 Vue.prototype.$bus = new EventBus();
-
-//Router configuration
-const router = new VueRouter({
-  mode: 'history',
-  routes
-})
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
