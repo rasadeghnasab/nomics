@@ -6,8 +6,7 @@
                     <h1>404</h1>
                     <h2 class="my-3 headline">Sorry, page not found</h2>
                     <div>
-                        <v-btn color="primary" @click="goBack">Take me back!</v-btn>
-                        <v-btn color="primary" @click="goHome">Go Home</v-btn>
+                        <v-link to="/">Go Home</v-link>
                     </div>
                 </div>
             </v-layout>
@@ -18,9 +17,6 @@
 <script>
 export default {
     methods: {
-        goBack() {
-            this.$router.go(-1);
-        },
         goHome() {
             this.$router.push({path: '/'})
         }

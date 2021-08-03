@@ -12,25 +12,22 @@
                             <div>
                                 <v-form v-model="valid" ref="form">
                                     <v-text-field
-                                        label="Enter your e-mail address"
+                                        label="Email"
                                         v-model="email"
                                         :rules="emailRules"
                                         required
                                     ></v-text-field>
                                     <v-text-field
-                                        label="Enter your password"
+                                        label="Password"
                                         v-model="password"
                                         min="8"
-                                        :append-icon="e1 ? 'fas fa-eye-slash': 'fas fa-eye'"
-                                        :append-icon-cb="() => (e1 = !e1)"
                                         :type="e1 ? 'password' : 'text'"
                                         :rules="passwordRules"
                                         counter
                                         required
                                     ></v-text-field>
                                     <v-layout justify-space-between>
-                                        <v-btn @click="submit" :class=" { 'blue darken-4 white--text' : valid, disabled: !valid }">Login</v-btn>
-                                        <a href="">Forgot Password</a>
+                                        <v-btn type="submit" @click="submit" :disabled="!valid" form="form" class="primary">Login</v-btn>
                                     </v-layout>
                                 </v-form>
                             </div>
@@ -43,11 +40,13 @@
 </template>
 
 <script>
+    import auth from '../../api/auth.js';
+
     export default {
         data () {
             return {
                 valid: false,
-                e1: false,
+                e1: true,
                 password: '',
                 passwordRules: [
                     (v) => !!v || 'Password is required',
@@ -60,10 +59,18 @@
             }
         },
         methods: {
-            submit () {
-                if (this.$refs.form.validate()) {
-                    this.$refs.form.$el.submit()
+            async submit () {
+                if (!this.$refs.form.validate()) {
+                    return;
                 }
+
+                const response = await auth.login({
+                    email: this.email,
+                    password: this.password
+                });
+
+                alert('response');
+                console.log(response)
             },
             clear () {
                 this.$refs.form.reset()

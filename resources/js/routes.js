@@ -1,6 +1,4 @@
 //Auth Components
-import AuthLayout from './components/Layouts/AuthLayout.vue'
-import Register from './components/Auth/Register.vue'
 import Login from './components/Auth/Login.vue'
 
 //General Components
@@ -16,7 +14,6 @@ const routes = () => {
 
     return [
         {path: '/', name: 'home', component: Home},
-        {path: '/register', name: 'landing.register', component: Register},
         {path: '/login', name: 'landing.login', component: Login},
         {path: '*', component: NotFound}
     ]

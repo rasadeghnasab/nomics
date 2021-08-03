@@ -36,8 +36,7 @@
         data () {
             return {
                 items: [
-                    { title: 'Login', icon: 'far fa-eye', 'to': '/login' },
-                    { title: 'Register', icon: 'mdi-view-dashboard', 'to': '/register' },
+                    { title: 'Login', icon: 'fas fa-sign-in-alt', to: '/login' },
                 ],
                 right: null,
             }
