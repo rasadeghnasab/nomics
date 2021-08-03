@@ -8,9 +8,16 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
-console.log('hi ramin');
-
+import Vue from 'vue';
 import Vuetify from '../plugins/vuetify';
+import VueRouter from 'vue-router'
+import EventBus from 'vue';
+import Toaster from 'v-toaster'
+
+import AppContainer from './components/AppContainer.vue';
+import router from './routes.js'
+
+import 'v-toaster/dist/v-toaster.css'
 
 /**
  * The following block of code may be used to automatically register your
@@ -23,7 +30,11 @@ import Vuetify from '../plugins/vuetify';
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('app-container', require('./components/AppContainer.vue').default);
+// Vue.component('app-container', require('./components/AppContainer.vue').default);
+
+Vue.use(VueRouter);
+Vue.use(Toaster, {timeout: 3000});
+Vue.prototype.$bus = new EventBus();
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -34,4 +45,6 @@ Vue.component('app-container', require('./components/AppContainer.vue').default)
 const app = new Vue({
     vuetify: Vuetify,
     el: '#app',
+    render: h => h(AppContainer),
+    router,
 });

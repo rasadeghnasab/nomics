@@ -18,29 +18,29 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $errorMessages = [
+            400 => 'Invalid Request. Please enter a username or a password.',
+            401 => 'Your credentials are incorrect. Please try again'
+        ];
+
         try {
             $request->request->add([
                 'grant_type' => 'password',
                 'client_id' => config('services.passport.client_id'),
                 'client_secret' => config('services.passport.client_secret'),
-                'username' => $request->username,
-                'password' => $request->password,
+                'username' => $request->get('username'),
+                'password' => $request->get('password'),
             ]);
             $tokenRequest = Request::create(
                 sprintf('%s/api/v1/oauth/token', env('APP_URL')),
                 'post'
             );
-            $response = Route::dispatch($tokenRequest);
 
-            return $response;
+            return Route::dispatch($tokenRequest);
         } catch (BadResponseException $exception) {
-            if ($exception->getCode() === 400) {
-                return response()->json('Invalid Request. Please enter a username or a password.', $exception->getCode());
-            } else if ($exception->getCode() === 401) {
-                return response()->json('Your credentials are incorrect. Please try again', $exception->getCode());
-            }
+            $message = $errorMessages[$exception->getCode()] ?? 'Something went wrong on the server.';
 
-            return response()->json('Something went wrong on the server.', $exception->getCode());
+            return response()->json(['message' => $message], $exception->getCode());
         }
     }
 
@@ -65,6 +65,8 @@ class AuthController extends Controller
             $token->delete();
         });
 
-        return response()->json('Logged out successfully');
+        return response()->json([
+            'message' => 'You logged out successfully.'
+        ]);
     }
 }
