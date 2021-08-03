@@ -35,12 +35,18 @@ class AuthController extends Controller
             return $response;
         } catch (BadResponseException $exception) {
             if ($exception->getCode() === 400) {
-                return response()->json('Invalid Request. Please enter a username or a password.', $exception->getCode());
+                return response()->json([
+                    'message' => 'Invalid Request. Please enter a username or a password.'
+                ], $exception->getCode());
             } else if ($exception->getCode() === 401) {
-                return response()->json('Your credentials are incorrect. Please try again', $exception->getCode());
+                return response()->json([
+                    'message' => 'Your credentials are incorrect. Please try again'
+                ], $exception->getCode());
             }
 
-            return response()->json('Something went wrong on the server.', $exception->getCode());
+            return response()->json([
+                'message' => 'Something went wrong on the server.'
+            ], $exception->getCode());
         }
     }
 
@@ -65,6 +71,8 @@ class AuthController extends Controller
             $token->delete();
         });
 
-        return response()->json('Logged out successfully');
+        return response()->json([
+            'message' => 'Logged out successfully'
+        ]);
     }
 }
