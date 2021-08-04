@@ -3,13 +3,6 @@
 </template>
 
 <script>
-import auth from '../../api/auth';
 
-export default {
-    beforeMount() {
-        if (!auth.authenticated()) {
-            this.$router.push({path: '/login'})
-        }
-    }
-}
+export default {}
 </script>
