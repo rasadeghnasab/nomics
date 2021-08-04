@@ -33,6 +33,6 @@ class NomicsServiceProvider extends ServiceProvider
         });
 
         // translation
-//        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'courier');
+//        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'nomics');
     }
 }
