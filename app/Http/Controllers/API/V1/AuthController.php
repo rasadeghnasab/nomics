@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
@@ -13,10 +14,10 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->only('logout');
+        $this->middleware('auth:api')->only(['logout', 'check']);
     }
 
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $errorMessages = [
             400 => 'Invalid Request. Please enter a username or a password.',
@@ -31,12 +32,8 @@ class AuthController extends Controller
                 'username' => $request->get('username'),
                 'password' => $request->get('password'),
             ]);
-            $tokenRequest = Request::create(
-                sprintf('%s/api/v1/oauth/token', env('APP_URL')),
-                'post'
-            );
 
-            return Route::dispatch($tokenRequest);
+            return response()->json($this->getToken());
         } catch (BadResponseException $exception) {
             $message = $errorMessages[$exception->getCode()] ?? 'Something went wrong on the server.';
 
@@ -44,7 +41,14 @@ class AuthController extends Controller
         }
     }
 
-    public function register(Request $request)
+    public function check(): JsonResponse
+    {
+        return response()->json([
+            'data' => auth()->user()
+        ]);
+    }
+
+    public function register(Request $request): JsonResponse
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -52,14 +56,16 @@ class AuthController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        return User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+        return response()->json([
+            'data' => User::create([
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'password' => Hash::make($request->get('password')),
+            ])
         ]);
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {
         auth()->user()->tokens->each(function ($token, $key) {
             $token->delete();
@@ -68,5 +74,15 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'You logged out successfully.'
         ]);
+    }
+
+    private function getToken(): mixed
+    {
+        $tokenRequest = Request::create(
+            sprintf('%s/api/v1/oauth/token', env('APP_URL')),
+            'post'
+        );
+
+        return json_decode((Route::dispatch($tokenRequest))->getContent(), true);
     }
 }

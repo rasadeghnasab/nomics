@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\V1\NomicsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\AuthController;
 
@@ -15,10 +15,12 @@ use App\Http\Controllers\API\V1\AuthController;
 |
 */
 
-Route::middleware('auth:api')->get('/auth-check', function (Request $request) {
-    return $request->user();
-});
-
-Route::post('register', [AuthController::class, 'register']);
+//Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
+Route::get('check', [AuthController::class, 'check']);
+
+Route::group(['prefix' => 'nomics'], function () {
+    Route::get('currencies', [NomicsController::class, 'currencies']);
+    Route::get('currencies/rate', [NomicsController::class, 'currencyRate']);
+});
