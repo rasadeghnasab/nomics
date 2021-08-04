@@ -13,9 +13,6 @@ class NomicsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // translation
-        // facade
-
         // config file
         $this->mergeConfigFrom(
             __DIR__ . '/config/nomics.php', 'nomics'
@@ -29,11 +26,13 @@ class NomicsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // facade
         $this->app->bind('nomics', function()
         {
             return new NomicsAPI;
         });
 
+        // translation
 //        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'courier');
     }
 }
