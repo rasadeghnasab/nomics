@@ -5,10 +5,12 @@ namespace App\Http\Controllers\API\V1;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Exception\BadResponseException;
 use App\Http\Controllers\Controller;
+use Psy\Util\Json;
 
 class AuthController extends Controller
 {
@@ -32,12 +34,8 @@ class AuthController extends Controller
                 'username' => $request->get('username'),
                 'password' => $request->get('password'),
             ]);
-            $tokenRequest = Request::create(
-                sprintf('%s/api/v1/oauth/token', env('APP_URL')),
-                'post'
-            );
 
-            return Route::dispatch($tokenRequest);
+            return response()->json($this->getToken());
         } catch (BadResponseException $exception) {
             $message = $errorMessages[$exception->getCode()] ?? 'Something went wrong on the server.';
 
@@ -47,7 +45,9 @@ class AuthController extends Controller
 
     public function check(): JsonResponse
     {
-        return response()->json(auth()->user());
+        return response()->json([
+            'data' => auth()->user()
+        ]);
     }
 
     public function register(Request $request): JsonResponse
@@ -58,10 +58,12 @@ class AuthController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        return User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+        return response()->json([
+            'data' => User::create([
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'password' => Hash::make($request->get('password')),
+            ])
         ]);
     }
 
@@ -74,5 +76,15 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'You logged out successfully.'
         ]);
+    }
+
+    private function getToken(): mixed
+    {
+        $tokenRequest = Request::create(
+            sprintf('%s/api/v1/oauth/token', env('APP_URL')),
+            'post'
+        );
+
+        return json_decode((Route::dispatch($tokenRequest))->getContent(), true);
     }
 }
