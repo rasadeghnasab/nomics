@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
@@ -13,10 +14,10 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->only('logout');
+        $this->middleware('auth:api')->only(['logout', 'check']);
     }
 
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $errorMessages = [
             400 => 'Invalid Request. Please enter a username or a password.',
@@ -44,7 +45,12 @@ class AuthController extends Controller
         }
     }
 
-    public function register(Request $request)
+    public function check(): JsonResponse
+    {
+        return response()->json(auth()->user());
+    }
+
+    public function register(Request $request): JsonResponse
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -59,7 +65,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {
         auth()->user()->tokens->each(function ($token, $key) {
             $token->delete();

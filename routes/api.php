@@ -15,10 +15,6 @@ use App\Http\Controllers\API\V1\AuthController;
 |
 */
 
-Route::middleware('auth:api')->get('/auth-check', function (Request $request) {
-    return $request->user();
-});
-
-Route::post('register', [AuthController::class, 'register']);
+//Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
