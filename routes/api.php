@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\V1\NomicsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\AuthController;
 
@@ -19,3 +19,8 @@ use App\Http\Controllers\API\V1\AuthController;
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
 Route::get('check', [AuthController::class, 'check']);
+
+Route::group(['prefix' => 'nomics'], function () {
+    Route::get('currencies', [NomicsController::class, 'currencies']);
+    Route::get('currencies/rate', [NomicsController::class, 'currencyRate']);
+});
