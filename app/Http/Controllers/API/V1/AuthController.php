@@ -5,12 +5,10 @@ namespace App\Http\Controllers\API\V1;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Exception\BadResponseException;
 use App\Http\Controllers\Controller;
-use Psy\Util\Json;
 
 class AuthController extends Controller
 {
