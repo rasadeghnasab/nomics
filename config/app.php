@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Services\Nomics\NomicsServiceProvider::class,
 
         /*
          * Application Service Providers...

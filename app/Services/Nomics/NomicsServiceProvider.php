@@ -29,6 +29,12 @@ class NomicsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        dd('OK');
+        $this->app->bind('payment', function()
+        {
+            return new \App\Services\Nomics\NomicsAPI;
+        });
+
 //        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'courier');
     }
 }
