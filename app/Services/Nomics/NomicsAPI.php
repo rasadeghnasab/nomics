@@ -21,6 +21,7 @@ class NomicsAPI
     {
         $url = 'currencies';
 
+        Cache::forget('nomics-currencies');
         return Cache::remember(
             'nomics-currencies',
             24 * 60 * 60,
