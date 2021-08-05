@@ -2265,19 +2265,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2324,29 +2311,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 this.cardLoading = true;
                 _context2.prev = 1;
-                console.log(this.selected.id);
-                _context2.next = 5;
+                _context2.next = 4;
                 return _api_nomics__WEBPACK_IMPORTED_MODULE_1__.default.currencyRate(this.selected.id);
 
-              case 5:
+              case 4:
                 currencies = _context2.sent.data;
                 this.currency = currencies.length > 0 ? currencies[0] : {};
                 this.cardLoading = false;
-                _context2.next = 14;
+                _context2.next = 12;
                 break;
 
-              case 10:
-                _context2.prev = 10;
+              case 9:
+                _context2.prev = 9;
                 _context2.t0 = _context2["catch"](1);
-                console.log('exception', _context2.t0);
                 alert('exception occurred');
 
-              case 14:
+              case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[1, 10]]);
+        }, _callee2, this, [[1, 9]]);
       }));
 
       function search() {
@@ -2371,10 +2356,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 _context3.prev = 6;
                 _context3.t0 = _context3["catch"](0);
-                console.log('exception', _context3.t0);
                 alert('exception occurred');
 
-              case 10:
+              case 9:
               case "end":
                 return _context3.stop();
             }
@@ -41416,6 +41400,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_6f716c15___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_6f716c15___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_6f716c15___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Home.vue?vue&type=template&id=6f716c15& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Pages/Home.vue?vue&type=template&id=6f716c15&");
 
 
@@ -41736,9 +41724,153 @@ render._withStripped = true
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Pages/Home.vue?vue&type=template&id=6f716c15& ***!
   \**********************************************************************************************************************************************************************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/vue-loader/lib/loaders/templateLoader.js):\nSyntaxError: Unexpected token (1:1438)\n    at Parser.pp$4.raise (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:2757:13)\n    at Parser.pp.unexpected (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:647:8)\n    at Parser.pp$3.parseIdent (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:2712:10)\n    at Parser.pp$3.parseSubscripts (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:2067:68)\n    at Parser.pp$3.parseExprSubscripts (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:2050:21)\n    at Parser.pp$3.parseMaybeUnary (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:2024:17)\n    at Parser.pp$3.parseExprOps (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:1966:19)\n    at Parser.pp$3.parseMaybeConditional (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:1949:19)\n    at Parser.pp$3.parseMaybeAssign (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:1925:19)\n    at Parser.pp$3.parseExprList (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:2663:20)\n    at Parser.pp$3.parseSubscripts (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:2075:29)\n    at Parser.pp$3.parseExprSubscripts (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:2050:21)\n    at Parser.pp$3.parseMaybeUnary (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:2024:17)\n    at Parser.pp$3.parseExprOp (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:1985:41)\n    at Parser.pp$3.parseExprOps (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:1968:91)\n    at Parser.pp$3.parseMaybeConditional (/var/www/html/node_modules/vue-template-es2015-compiler/buble.js:1949:19)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { fluid: "" } },
+    [
+      _c(
+        "v-row",
+        { attrs: { align: "center" } },
+        [
+          _c(
+            "v-col",
+            { attrs: { cols: "4" } },
+            [
+              _c("v-subheader", [
+                _vm._v("\n                Currencies:\n            ")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            { attrs: { cols: "4" } },
+            [
+              _c("v-autocomplete", {
+                attrs: {
+                  items: _vm.items,
+                  "item-text": "name",
+                  "item-value": "id",
+                  label: "Select",
+                  "return-object": "",
+                  "single-line": ""
+                },
+                model: {
+                  value: _vm.selected,
+                  callback: function($$v) {
+                    _vm.selected = $$v
+                  },
+                  expression: "selected"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            { attrs: { cols: "4" } },
+            [
+              _c(
+                "v-btn",
+                { staticClass: "primary", on: { click: _vm.search } },
+                [_vm._v("Search")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.currencyExists || _vm.cardLoading
+        ? _c(
+            "v-row",
+            { attrs: { align: "center" } },
+            [
+              _vm.cardLoading
+                ? _c("v-skeleton-loader", {
+                    staticClass: "mx-auto",
+                    attrs: {
+                      "max-width": "300",
+                      "min-width": "300",
+                      "min-height": "200",
+                      type: "card"
+                    }
+                  })
+                : _vm.currencyExists
+                ? _c(
+                    "v-card",
+                    {
+                      staticClass: "mx-auto",
+                      attrs: {
+                        elevation: "2",
+                        outlined: "",
+                        shaped: "",
+                        tile: "",
+                        "max-width": "300",
+                        "min-width": "300",
+                        "min-height": "200"
+                      }
+                    },
+                    [
+                      _c("v-card-title", [
+                        _vm._v(
+                          _vm._s(_vm.currency.name) +
+                            " (" +
+                            _vm._s(_vm.currency.currency) +
+                            ")"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("v-card-text", [
+                        _c("div", { staticClass: "my-4 text-subtitle-1" }, [
+                          _vm._v(
+                            "\n                    Price: $" +
+                              _vm._s(_vm.currency.price) +
+                              "\n                "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-text",
+                        [
+                          _c("v-chip", [
+                            _vm._v("Status: " + _vm._s(_vm.currency.status))
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
 
 /***/ }),
 

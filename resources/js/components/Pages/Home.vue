@@ -29,6 +29,7 @@
                 class="mx-auto"
                 max-width="300"
                 min-width="300"
+                min-height="200"
                 type="card"
             ></v-skeleton-loader>
             <v-card
@@ -39,31 +40,17 @@
                 tile
                 max-width="300"
                 min-width="300"
+                min-height="200"
                 class="mx-auto"
             >
                 <v-card-title>{{ currency.name }} ({{ currency.currency }})</v-card-title>
                 <v-card-text>
-                    <v-row
-                        align="center"
-                        class="mx-0"
-                    >
-                        <div class="grey--text ms-4">
-                            ${{ currency.price }}
-                        </div>
-                    </v-row>
-
                     <div class="my-4 text-subtitle-1">
-                        $ • Italian, Cafe
+                        Price: ${{ currency.price }}
                     </div>
                 </v-card-text>
                 <v-card-text>
-                    <v-chip>High: {{currency.}}</v-chip>
-
-                    <v-chip>7:30PM</v-chip>
-
-                    <v-chip>8:00PM</v-chip>
-
-                    <v-chip>9:00PM</v-chip>
+                    <v-chip>Status: {{ currency.status }}</v-chip>
                 </v-card-text>
             </v-card>
         </v-row>
@@ -94,13 +81,11 @@ export default {
         search: async function () {
             this.cardLoading = true;
             try {
-                console.log(this.selected.id);
                 const currencies = (await nomics.currencyRate(this.selected.id)).data;
 
                 this.currency = currencies.length > 0 ? currencies[0] : {};
                 this.cardLoading = false;
             } catch (exception) {
-                console.log('exception', exception);
                 alert('exception occurred');
             }
         },
@@ -108,7 +93,6 @@ export default {
             try {
                 return await nomics.currencies();
             } catch (exception) {
-                console.log('exception', exception);
                 alert('exception occurred');
             }
         }
