@@ -6,12 +6,13 @@ BOLD_GREEN=\033[1;32m
 
 ADDRESS=http://localhost
 
-project:
-	#$(SAIL) up -d
+project: install
+	$(SAIL) up -d
 	$(SAIL) artisan key:generate
 	$(SAIL) artisan migrate:refresh --seed
 	$(SAIL) artisan passport:install --force
 	$(SAIL) artisan optimize:clear
+	cp .env.example .env
 	@echo Visit: "${BOLD_GREEN} ${ADDRESS}"
 
 install:
