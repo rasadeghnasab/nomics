@@ -18,13 +18,13 @@ class NomicsController extends Controller
     {
         $currencies = Nomics::allCurrencies(['attributes' => 'id,name']);
 
-        return response()->json($currencies->pluck('name', 'id'));
+        return response()->json($currencies);
     }
 
     public function currencyRate(Request $request): JsonResponse
     {
         $rate = Nomics::currenciesTicker([
-            'id' => $request->get('ids'),
+            'ids' => $request->get('ids'),
             'per-page' => $request->get('per-page', 1),
         ]);
 

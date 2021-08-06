@@ -17,15 +17,15 @@ class NomicsAPI
         $this->key = config('nomics.key');
     }
 
-    public function allCurrencies(): Collection
+    public function allCurrencies(array $data): Collection
     {
         $url = 'currencies';
 
         return Cache::remember(
             'nomics-currencies',
             24 * 60 * 60,
-            function () use ($url): Collection {
-                return $this->get($url);
+            function () use ($url, $data): Collection {
+                return $this->get($url, $data);
             }
         );
     }
