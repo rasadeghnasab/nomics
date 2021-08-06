@@ -2,108 +2,49 @@
     <v-container fluid>
         <v-row align="center">
             <v-col cols="4">
-                <v-subheader>
-                    Currencies:
-                </v-subheader>
+                <v-subheader>Currencies:</v-subheader>
             </v-col>
 
             <v-col cols="4">
-                <v-autocomplete
-                    v-model="selected"
-                    :items="items"
-                    item-text="name"
-                    item-value="id"
-                    label="Select"
-                    return-object
-                    single-line
-                ></v-autocomplete>
+                <currencies-select-box @currencyChange="changeCurrency"/>
             </v-col>
 
             <v-col cols="4">
                 <v-btn @click="search" class="primary">Search</v-btn>
             </v-col>
         </v-row>
-        <v-row align="center" v-if="currencyExists || cardLoading">
-            <v-skeleton-loader
-                v-if="cardLoading"
-                loading="true"
-                class="mx-auto"
-                max-width="300"
-                min-width="300"
-                min-height="200"
-                type="article, chip"
-            ></v-skeleton-loader>
-            <v-card
-                v-else-if="currencyExists"
-                elevation="2"
-                outlined
-                shaped
-                tile
-                max-width="300"
-                min-width="300"
-                min-height="200"
-                class="mx-auto"
-            >
-                <v-card-text>
-                    <div>{{ currency.currency }}</div>
-                    <p class="text-h4 text--primary">
-                        {{ currency.name }}
-                    </p>
-                    <div class="my-4 text-subtitle-1">
-                        Price: ${{ currency.price }}
-                    </div>
-                </v-card-text>
-                <v-card-text>
-                    <v-chip>Status: {{ currency.status }}</v-chip>
-                </v-card-text>
-            </v-card>
+        <v-row align="center">
+            <currencies-details :currenciesIds="selectedCurrenciesIds" ref="currenciesDetails"/>
         </v-row>
     </v-container>
 </template>
 
 <script>
 
-import nomics from '../../api/nomics';
+import CurrenciesSelectBox from '../Nomics/CurrenciesSelectBox';
+import CurrenciesDetails from "../Nomics/CurrenciesDetails";
 
 export default {
     data() {
         return {
-            cardLoading: false,
-            selected: {},
-            items: [],
-            currency: {},
+            selectedCurrencies: [],
         }
     },
-    async mounted() {
-        this.items = (await this.getCurrencies()).data;
-
-        if (this.items.length) {
-            this.selected = this.items[0];
-        }
+    components: {
+        'currencies-select-box': CurrenciesSelectBox,
+        'currencies-details': CurrenciesDetails,
     },
     methods: {
-        search: async function () {
-            this.cardLoading = true;
-            try {
-                const currencies = (await nomics.currencyRate(this.selected.id)).data;
-
-                this.currency = currencies.length > 0 ? currencies[0] : {};
-                this.cardLoading = false;
-            } catch (exception) {
-                alert('exception occurred');
-            }
+        search: function () {
+            this.$refs.currenciesDetails.search();
         },
-        getCurrencies: async () => {
-            try {
-                return await nomics.currencies();
-            } catch (exception) {
-                alert('exception occurred');
-            }
+        changeCurrency: function (currency) {
+            this.selectedCurrencies = [currency];
         }
     },
     computed: {
-        currencyExists: function () {
-            return this.currency && Object.keys(this.currency).length > 0 && this.currency.constructor === Object;
+        selectedCurrenciesIds: function () {
+            return this.selectedCurrencies.map((currency) => currency.id);
         }
     }
 }

@@ -3,10 +3,10 @@ export default {
         return axios.get('nomics/currencies');
     },
 
-    currencyRate(currencies_ids) {
+    currencyRate(currenciesIds) {
         return axios.get('nomics/currencies/rate', {
             params: {
-                ids: currencies_ids
+                ids: currenciesIds
             }
         })
     }

@@ -2186,10 +2186,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Pages/Home.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Pages/Home.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nomics/CurrenciesDetails.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nomics/CurrenciesDetails.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2245,17 +2245,88 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    currenciesIds: {
+      required: false,
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    }
+  },
+  data: function data() {
+    return {
+      currencies: [],
+      isSearching: false
+    };
+  },
+  methods: {
+    search: function () {
+      var _search = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var ids, currencies;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.isSearching = true;
+                _context.prev = 1;
+                ids = this.currenciesIds.join(',');
+                _context.next = 5;
+                return _api_nomics__WEBPACK_IMPORTED_MODULE_1__.default.currencyRate(ids);
+
+              case 5:
+                currencies = _context.sent.data;
+                this.currencies = currencies.length > 0 ? [currencies[0]] : [{}];
+                this.isSearching = false;
+                _context.next = 13;
+                break;
+
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](1);
+                alert('exception occurred');
+
+              case 13:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[1, 10]]);
+      }));
+
+      function search() {
+        return _search.apply(this, arguments);
+      }
+
+      return search;
+    }()
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nomics/CurrenciesSelectBox.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nomics/CurrenciesSelectBox.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _api_nomics__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/nomics */ "./resources/js/api/nomics.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2273,10 +2344,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      cardLoading: false,
       selected: {},
-      items: [],
-      currency: {}
+      items: []
     };
   },
   mounted: function mounted() {
@@ -2295,6 +2364,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               if (_this.items.length) {
                 _this.selected = _this.items[0];
+
+                _this.changeSelectedCurrency();
               }
 
             case 4:
@@ -2306,68 +2377,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    search: function () {
-      var _search = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var currencies;
+    changeSelectedCurrency: function changeSelectedCurrency() {
+      this.$emit('currencyChange', this.selected);
+    },
+    getCurrencies: function () {
+      var _getCurrencies = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                this.cardLoading = true;
-                _context2.prev = 1;
-                _context2.next = 4;
-                return _api_nomics__WEBPACK_IMPORTED_MODULE_1__.default.currencyRate(this.selected.id);
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _api_nomics__WEBPACK_IMPORTED_MODULE_1__.default.currencies();
 
-              case 4:
-                currencies = _context2.sent.data;
-                this.currency = currencies.length > 0 ? currencies[0] : {};
-                this.cardLoading = false;
-                _context2.next = 12;
-                break;
+              case 3:
+                return _context2.abrupt("return", _context2.sent);
 
-              case 9:
-                _context2.prev = 9;
-                _context2.t0 = _context2["catch"](1);
+              case 6:
+                _context2.prev = 6;
+                _context2.t0 = _context2["catch"](0);
                 alert('exception occurred');
 
-              case 12:
+              case 9:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[1, 9]]);
-      }));
-
-      function search() {
-        return _search.apply(this, arguments);
-      }
-
-      return search;
-    }(),
-    getCurrencies: function () {
-      var _getCurrencies = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.prev = 0;
-                _context3.next = 3;
-                return _api_nomics__WEBPACK_IMPORTED_MODULE_1__.default.currencies();
-
-              case 3:
-                return _context3.abrupt("return", _context3.sent);
-
-              case 6:
-                _context3.prev = 6;
-                _context3.t0 = _context3["catch"](0);
-                alert('exception occurred');
-
-              case 9:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, null, [[0, 6]]);
+        }, _callee2, null, [[0, 6]]);
       }));
 
       function getCurrencies() {
@@ -2376,10 +2412,70 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return getCurrencies;
     }()
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Pages/Home.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Pages/Home.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Nomics_CurrenciesSelectBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Nomics/CurrenciesSelectBox */ "./resources/js/components/Nomics/CurrenciesSelectBox.vue");
+/* harmony import */ var _Nomics_CurrenciesDetails__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Nomics/CurrenciesDetails */ "./resources/js/components/Nomics/CurrenciesDetails.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      selectedCurrencies: []
+    };
+  },
+  components: {
+    'currencies-select-box': _Nomics_CurrenciesSelectBox__WEBPACK_IMPORTED_MODULE_0__.default,
+    'currencies-details': _Nomics_CurrenciesDetails__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  methods: {
+    search: function search() {
+      this.$refs.currenciesDetails.search();
+    },
+    changeCurrency: function changeCurrency(currency) {
+      this.selectedCurrencies = [currency];
+    }
   },
   computed: {
-    currencyExists: function currencyExists() {
-      return this.currency && Object.keys(this.currency).length > 0 && this.currency.constructor === Object;
+    selectedCurrenciesIds: function selectedCurrenciesIds() {
+      return this.selectedCurrencies.map(function (currency) {
+        return currency.id;
+      });
     }
   }
 });
@@ -2432,10 +2528,10 @@ __webpack_require__.r(__webpack_exports__);
   currencies: function currencies() {
     return axios.get('nomics/currencies');
   },
-  currencyRate: function currencyRate(currencies_ids) {
+  currencyRate: function currencyRate(currenciesIds) {
     return axios.get('nomics/currencies/rate', {
       params: {
-        ids: currencies_ids
+        ids: currenciesIds
       }
     });
   }
@@ -41299,6 +41395,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Nomics/CurrenciesDetails.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/Nomics/CurrenciesDetails.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrenciesDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CurrenciesDetails.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nomics/CurrenciesDetails.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrenciesDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Nomics/CurrenciesSelectBox.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Nomics/CurrenciesSelectBox.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrenciesSelectBox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CurrenciesSelectBox.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nomics/CurrenciesSelectBox.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrenciesSelectBox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Pages/Home.vue?vue&type=script&lang=js&":
 /*!*************************************************************************!*\
   !*** ./resources/js/components/Pages/Home.vue?vue&type=script&lang=js& ***!
@@ -41392,6 +41520,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFound_vue_vue_type_template_id_df527d7e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFound_vue_vue_type_template_id_df527d7e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NotFound.vue?vue&type=template&id=df527d7e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/General/NotFound.vue?vue&type=template&id=df527d7e&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Nomics/CurrenciesDetails.vue?vue&type=template&id=5bf0ff48&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/Nomics/CurrenciesDetails.vue?vue&type=template&id=5bf0ff48& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrenciesDetails_vue_vue_type_template_id_5bf0ff48___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrenciesDetails_vue_vue_type_template_id_5bf0ff48___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrenciesDetails_vue_vue_type_template_id_5bf0ff48___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CurrenciesDetails.vue?vue&type=template&id=5bf0ff48& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nomics/CurrenciesDetails.vue?vue&type=template&id=5bf0ff48&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Nomics/CurrenciesSelectBox.vue?vue&type=template&id=b3c9d36e&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/Nomics/CurrenciesSelectBox.vue?vue&type=template&id=b3c9d36e& ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrenciesSelectBox_vue_vue_type_template_id_b3c9d36e___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrenciesSelectBox_vue_vue_type_template_id_b3c9d36e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrenciesSelectBox_vue_vue_type_template_id_b3c9d36e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CurrenciesSelectBox.vue?vue&type=template&id=b3c9d36e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nomics/CurrenciesSelectBox.vue?vue&type=template&id=b3c9d36e&");
 
 
 /***/ }),
@@ -41724,6 +41886,147 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nomics/CurrenciesDetails.vue?vue&type=template&id=5bf0ff48&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nomics/CurrenciesDetails.vue?vue&type=template&id=5bf0ff48& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm._l(_vm.currenciesIds, function(currencyId) {
+        return _vm.isSearching
+          ? _c("v-skeleton-loader", {
+              attrs: {
+                "max-width": "300",
+                "min-width": "300",
+                "min-height": "200",
+                type: "article, chip"
+              }
+            })
+          : _vm._e()
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.currencies, function(currency) {
+        return !_vm.isSearching
+          ? _c(
+              "div",
+              [
+                _c(
+                  "v-card",
+                  {
+                    attrs: {
+                      elevation: "2",
+                      outlined: "",
+                      shaped: "",
+                      tile: "",
+                      "max-width": "300",
+                      "min-width": "300",
+                      "min-height": "200"
+                    }
+                  },
+                  [
+                    _c("v-card-text", [
+                      _c("div", [_vm._v(_vm._s(currency.currency))]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "text-h4 text--primary" }, [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(currency.name) +
+                            "\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "my-4 text-subtitle-1" }, [
+                        _vm._v(
+                          "\n                    Price: $" +
+                            _vm._s(currency.price) +
+                            "\n                "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "v-card-text",
+                      [
+                        _c("v-chip", [
+                          _vm._v("Status: " + _vm._s(currency.status))
+                        ])
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          : _vm._e()
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nomics/CurrenciesSelectBox.vue?vue&type=template&id=b3c9d36e&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nomics/CurrenciesSelectBox.vue?vue&type=template&id=b3c9d36e& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("v-autocomplete", {
+    attrs: {
+      items: _vm.items,
+      "item-text": "name",
+      "item-value": "id",
+      label: "Select",
+      "return-object": "",
+      "single-line": ""
+    },
+    on: { change: _vm.changeSelectedCurrency },
+    model: {
+      value: _vm.selected,
+      callback: function($$v) {
+        _vm.selected = $$v
+      },
+      expression: "selected"
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Pages/Home.vue?vue&type=template&id=6f716c15&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Pages/Home.vue?vue&type=template&id=6f716c15& ***!
@@ -41751,11 +42054,7 @@ var render = function() {
           _c(
             "v-col",
             { attrs: { cols: "4" } },
-            [
-              _c("v-subheader", [
-                _vm._v("\n                Currencies:\n            ")
-              ])
-            ],
+            [_c("v-subheader", [_vm._v("Currencies:")])],
             1
           ),
           _vm._v(" "),
@@ -41763,22 +42062,8 @@ var render = function() {
             "v-col",
             { attrs: { cols: "4" } },
             [
-              _c("v-autocomplete", {
-                attrs: {
-                  items: _vm.items,
-                  "item-text": "name",
-                  "item-value": "id",
-                  label: "Select",
-                  "return-object": "",
-                  "single-line": ""
-                },
-                model: {
-                  value: _vm.selected,
-                  callback: function($$v) {
-                    _vm.selected = $$v
-                  },
-                  expression: "selected"
-                }
+              _c("currencies-select-box", {
+                on: { currencyChange: _vm.changeCurrency }
               })
             ],
             1
@@ -41800,75 +42085,17 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.currencyExists || _vm.cardLoading
-        ? _c(
-            "v-row",
-            { attrs: { align: "center" } },
-            [
-              _vm.cardLoading
-                ? _c("v-skeleton-loader", {
-                    staticClass: "mx-auto",
-                    attrs: {
-                      loading: "true",
-                      "max-width": "300",
-                      "min-width": "300",
-                      "min-height": "200",
-                      type: "article, chip"
-                    }
-                  })
-                : _vm.currencyExists
-                ? _c(
-                    "v-card",
-                    {
-                      staticClass: "mx-auto",
-                      attrs: {
-                        elevation: "2",
-                        outlined: "",
-                        shaped: "",
-                        tile: "",
-                        "max-width": "300",
-                        "min-width": "300",
-                        "min-height": "200"
-                      }
-                    },
-                    [
-                      _c("v-card-text", [
-                        _c("div", [_vm._v(_vm._s(_vm.currency.currency))]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "text-h4 text--primary" }, [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(_vm.currency.name) +
-                              "\n                "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "my-4 text-subtitle-1" }, [
-                          _vm._v(
-                            "\n                    Price: $" +
-                              _vm._s(_vm.currency.price) +
-                              "\n                "
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "v-card-text",
-                        [
-                          _c("v-chip", [
-                            _vm._v("Status: " + _vm._s(_vm.currency.status))
-                          ])
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e()
-            ],
-            1
-          )
-        : _vm._e()
+      _c(
+        "v-row",
+        { attrs: { align: "center" } },
+        [
+          _c("currencies-details", {
+            ref: "currenciesDetails",
+            attrs: { currenciesIds: _vm.selectedCurrenciesIds }
+          })
+        ],
+        1
+      )
     ],
     1
   )
@@ -57421,6 +57648,108 @@ component.options.__file = "resources/js/components/General/NotFound.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/Nomics/CurrenciesDetails.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/Nomics/CurrenciesDetails.vue ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CurrenciesDetails_vue_vue_type_template_id_5bf0ff48___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CurrenciesDetails.vue?vue&type=template&id=5bf0ff48& */ "./resources/js/components/Nomics/CurrenciesDetails.vue?vue&type=template&id=5bf0ff48&");
+/* harmony import */ var _CurrenciesDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CurrenciesDetails.vue?vue&type=script&lang=js& */ "./resources/js/components/Nomics/CurrenciesDetails.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
+/* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/VCard.js");
+/* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
+/* harmony import */ var vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VChip */ "./node_modules/vuetify/lib/components/VChip/VChip.js");
+/* harmony import */ var vuetify_lib_components_VSkeletonLoader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VSkeletonLoader */ "./node_modules/vuetify/lib/components/VSkeletonLoader/VSkeletonLoader.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _CurrenciesDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _CurrenciesDetails_vue_vue_type_template_id_5bf0ff48___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CurrenciesDetails_vue_vue_type_template_id_5bf0ff48___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* vuetify-loader */
+;
+
+
+
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_4__.default,VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__.VCardText,VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_6__.default,VSkeletonLoader: vuetify_lib_components_VSkeletonLoader__WEBPACK_IMPORTED_MODULE_7__.default})
+
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Nomics/CurrenciesDetails.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Nomics/CurrenciesSelectBox.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/Nomics/CurrenciesSelectBox.vue ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CurrenciesSelectBox_vue_vue_type_template_id_b3c9d36e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CurrenciesSelectBox.vue?vue&type=template&id=b3c9d36e& */ "./resources/js/components/Nomics/CurrenciesSelectBox.vue?vue&type=template&id=b3c9d36e&");
+/* harmony import */ var _CurrenciesSelectBox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CurrenciesSelectBox.vue?vue&type=script&lang=js& */ "./resources/js/components/Nomics/CurrenciesSelectBox.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
+/* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VAutocomplete */ "./node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _CurrenciesSelectBox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _CurrenciesSelectBox_vue_vue_type_template_id_b3c9d36e___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CurrenciesSelectBox_vue_vue_type_template_id_b3c9d36e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* vuetify-loader */
+;
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_4__.default})
+
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Nomics/CurrenciesSelectBox.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Pages/Home.vue":
 /*!************************************************!*\
   !*** ./resources/js/components/Pages/Home.vue ***!
@@ -57437,16 +57766,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VAutocomplete */ "./node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete.js");
-/* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/VBtn.js");
-/* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/VCard.js");
-/* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
-/* harmony import */ var vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VChip */ "./node_modules/vuetify/lib/components/VChip/VChip.js");
-/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/VCol.js");
-/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/VContainer.js");
-/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/VRow.js");
-/* harmony import */ var vuetify_lib_components_VSkeletonLoader__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VSkeletonLoader */ "./node_modules/vuetify/lib/components/VSkeletonLoader/VSkeletonLoader.js");
-/* harmony import */ var vuetify_lib_components_VSubheader__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VSubheader */ "./node_modules/vuetify/lib/components/VSubheader/VSubheader.js");
+/* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/VBtn.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/VCol.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/VContainer.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/VRow.js");
+/* harmony import */ var vuetify_lib_components_VSubheader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VSubheader */ "./node_modules/vuetify/lib/components/VSubheader/VSubheader.js");
 
 
 
@@ -57472,12 +57796,7 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 
 
-
-
-
-
-
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_4__.default,VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_5__.default,VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__.default,VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_7__.VCardText,VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_8__.default,VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_9__.default,VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_10__.default,VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_11__.default,VSkeletonLoader: vuetify_lib_components_VSkeletonLoader__WEBPACK_IMPORTED_MODULE_12__.default,VSubheader: vuetify_lib_components_VSubheader__WEBPACK_IMPORTED_MODULE_13__.default})
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__.default,VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_5__.default,VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__.default,VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__.default,VSubheader: vuetify_lib_components_VSubheader__WEBPACK_IMPORTED_MODULE_8__.default})
 
 
 /* hot reload */
