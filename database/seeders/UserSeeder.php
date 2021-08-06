@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,7 +23,7 @@ class UserSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Theodore',
-            'email' => 'Theodore.Sentelidis@quant.network',
+            'email' => 'theodore.sentelidis@quant.network',
             'password' => Hash::make('password'),
         ]);
 
