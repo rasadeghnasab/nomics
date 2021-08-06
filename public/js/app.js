@@ -2265,6 +2265,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -41805,10 +41809,11 @@ var render = function() {
                 ? _c("v-skeleton-loader", {
                     staticClass: "mx-auto",
                     attrs: {
+                      loading: "true",
                       "max-width": "300",
                       "min-width": "300",
                       "min-height": "200",
-                      type: "card"
+                      type: "article, chip"
                     }
                   })
                 : _vm.currencyExists
@@ -41827,16 +41832,17 @@ var render = function() {
                       }
                     },
                     [
-                      _c("v-card-title", [
-                        _vm._v(
-                          _vm._s(_vm.currency.name) +
-                            " (" +
-                            _vm._s(_vm.currency.currency) +
-                            ")"
-                        )
-                      ]),
-                      _vm._v(" "),
                       _c("v-card-text", [
+                        _c("div", [_vm._v(_vm._s(_vm.currency.currency))]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "text-h4 text--primary" }, [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(_vm.currency.name) +
+                              "\n                "
+                          )
+                        ]),
+                        _vm._v(" "),
                         _c("div", { staticClass: "my-4 text-subtitle-1" }, [
                           _vm._v(
                             "\n                    Price: $" +
@@ -57471,8 +57477,7 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 
 
-
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_4__.default,VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_5__.default,VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__.default,VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_7__.VCardText,VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_7__.VCardTitle,VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_8__.default,VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_9__.default,VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_10__.default,VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_11__.default,VSkeletonLoader: vuetify_lib_components_VSkeletonLoader__WEBPACK_IMPORTED_MODULE_12__.default,VSubheader: vuetify_lib_components_VSubheader__WEBPACK_IMPORTED_MODULE_13__.default})
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_4__.default,VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_5__.default,VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__.default,VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_7__.VCardText,VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_8__.default,VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_9__.default,VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_10__.default,VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_11__.default,VSkeletonLoader: vuetify_lib_components_VSkeletonLoader__WEBPACK_IMPORTED_MODULE_12__.default,VSubheader: vuetify_lib_components_VSubheader__WEBPACK_IMPORTED_MODULE_13__.default})
 
 
 /* hot reload */

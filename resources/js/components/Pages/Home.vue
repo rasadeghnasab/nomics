@@ -26,11 +26,12 @@
         <v-row align="center" v-if="currencyExists || cardLoading">
             <v-skeleton-loader
                 v-if="cardLoading"
+                loading="true"
                 class="mx-auto"
                 max-width="300"
                 min-width="300"
                 min-height="200"
-                type="card"
+                type="article, chip"
             ></v-skeleton-loader>
             <v-card
                 v-else-if="currencyExists"
@@ -43,8 +44,11 @@
                 min-height="200"
                 class="mx-auto"
             >
-                <v-card-title>{{ currency.name }} ({{ currency.currency }})</v-card-title>
                 <v-card-text>
+                    <div>{{ currency.currency }}</div>
+                    <p class="text-h4 text--primary">
+                        {{ currency.name }}
+                    </p>
                     <div class="my-4 text-subtitle-1">
                         Price: ${{ currency.price }}
                     </div>
