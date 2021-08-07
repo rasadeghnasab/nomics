@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +25,23 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        if (empty(env('PASSPORT_CLIENT_SECRET'))) {
+            $this->setPassportClient();
+        }
+    }
+
+    /**
+     * This function is just for the testing purposes
+     * So that the tester doesn't have to set passport client secret in the .env file manually.
+     */
+    public function setPassportClient(): void
+    {
+        $query = 'select * from oauth_clients where `personal_access_client` = ? and `password_client` = ?';
+        $oauth_client = collect(DB::select($query, [0, 1]))->first();
+
+        if ($oauth_client) {
+            $this->app->config->set('services.passport.client_id', $oauth_client->id);
+            $this->app->config->set('services.passport.client_secret', $oauth_client->secret);
+        }
     }
 }

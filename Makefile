@@ -8,11 +8,11 @@ ADDRESS=http://localhost
 
 project: install
 	$(SAIL) up -d
+	cp .env.example .env
+	$(SAIL) artisan optimize:clear
 	$(SAIL) artisan key:generate
 	$(SAIL) artisan migrate:refresh --seed
 	$(SAIL) artisan passport:install --force
-	$(SAIL) artisan optimize:clear
-	cp .env.example .env
 	@echo Visit: "${BOLD_GREEN} ${ADDRESS}"
 
 install:
