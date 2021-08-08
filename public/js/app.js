@@ -2245,6 +2245,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -41908,6 +41909,7 @@ var render = function() {
       _vm._l(_vm.currenciesIds, function(currencyId) {
         return _vm.isSearching
           ? _c("v-skeleton-loader", {
+              key: currencyId,
               attrs: {
                 "max-width": "300",
                 "min-width": "300",

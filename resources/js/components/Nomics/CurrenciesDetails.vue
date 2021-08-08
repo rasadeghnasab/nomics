@@ -2,6 +2,7 @@
     <div>
         <v-skeleton-loader
             v-for="currencyId in currenciesIds"
+            :key="currencyId"
             v-if="isSearching"
             max-width="300"
             min-width="300"
