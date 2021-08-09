@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Exception\BadResponseException;
 use App\Http\Controllers\Controller;
@@ -15,10 +15,10 @@ class AuthController extends Controller
         $this->middleware('auth:api')->only(['logout', 'check']);
     }
 
-    public function login(Request $request): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
         try {
-            $request->request->add([
+            $request->merge([
                 'grant_type' => 'password',
                 'client_id' => config('services.passport.client_id'),
                 'client_secret' => config('services.passport.client_secret'),
@@ -26,7 +26,7 @@ class AuthController extends Controller
                 'password' => $request->get('password'),
             ]);
 
-            $tokenRequest = Request::create(
+            $tokenRequest = LoginRequest::create(
                 sprintf('%s/api/v1/oauth/token', env('APP_URL')),
                 'post'
             );
