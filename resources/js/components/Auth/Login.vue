@@ -70,7 +70,12 @@ export default {
                 const response = await auth.login({
                     username: this.email,
                     password: this.password
-                })
+                });
+
+                if (response.data.error) {
+                    this.$toaster.error(response.data.message);
+                    return;
+                }
 
                 auth.saveAuthorizedUser(response.data.access_token);
                 this.$bus.$emit('logged', 'User logged in')
