@@ -72,11 +72,6 @@ export default {
                     password: this.password
                 });
 
-                if (response.data.error) {
-                    this.$toaster.error(response.data.message);
-                    return;
-                }
-
                 auth.saveAuthorizedUser(response.data.access_token);
                 this.$bus.$emit('logged', 'User logged in')
                 this.$router.push({path: '/'});

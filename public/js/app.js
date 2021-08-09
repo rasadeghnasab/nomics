@@ -2037,17 +2037,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 5:
                 response = _context.sent;
-
-                if (!response.data.error) {
-                  _context.next = 9;
-                  break;
-                }
-
-                _this.$toaster.error(response.data.message);
-
-                return _context.abrupt("return");
-
-              case 9:
                 _api_auth_js__WEBPACK_IMPORTED_MODULE_1__.default.saveAuthorizedUser(response.data.access_token);
 
                 _this.$bus.$emit('logged', 'User logged in');
@@ -2058,21 +2047,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.$toaster.success('You logged in successfully.');
 
-                _context.next = 18;
+                _context.next = 15;
                 break;
 
-              case 15:
-                _context.prev = 15;
+              case 12:
+                _context.prev = 12;
                 _context.t0 = _context["catch"](2);
 
                 _this.$toaster.error(_context.t0.response.data.message);
 
-              case 18:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 15]]);
+        }, _callee, null, [[2, 12]]);
       }))();
     },
     clear: function clear() {
