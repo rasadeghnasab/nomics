@@ -2275,7 +2275,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.prev = 1;
                 ids = this.currenciesIds.join(',');
                 _context.next = 5;
-                return _api_nomics__WEBPACK_IMPORTED_MODULE_1__.default.currencyRate(ids);
+                return _api_nomics__WEBPACK_IMPORTED_MODULE_1__.default.currencyDetail(ids);
 
               case 5:
                 currencies = _context.sent.data;
@@ -2529,7 +2529,7 @@ __webpack_require__.r(__webpack_exports__);
   currencies: function currencies() {
     return axios.get('nomics/currencies');
   },
-  currencyRate: function currencyRate(currenciesIds) {
+  currencyDetail: function currencyDetail(currenciesIds) {
     return axios.get('nomics/currencies/rate', {
       params: {
         ids: currenciesIds

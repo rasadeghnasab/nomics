@@ -60,7 +60,7 @@ export default {
             this.isSearching = true;
             try {
                 const ids = this.currenciesIds.join(',');
-                const currencies = (await nomics.currencyRate(ids)).data;
+                const currencies = (await nomics.currencyDetail(ids)).data;
 
                 this.currencies = currencies.length > 0 ? [currencies[0]] : [{}];
                 this.isSearching = false;
