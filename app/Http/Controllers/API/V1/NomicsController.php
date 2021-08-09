@@ -21,9 +21,9 @@ class NomicsController extends Controller
         return response()->json($currencies);
     }
 
-    public function currencyRate(GetCurrenciesRateRequest $request): JsonResponse
+    public function currencyDetail(GetCurrenciesRateRequest $request): JsonResponse
     {
-        $rate = Nomics::currenciesTicker([
+        $rate = Nomics::currencyDetail([
             'ids' => $request->get('ids'),
             'per-page' => $request->get('per-page', 1),
         ]);

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
@@ -41,5 +42,16 @@ class GetAllCurrenciesTest extends TestCase
         $response = $this->json('get', route('nomics.currencies'));
 
         $response->assertJson($this->currencies);
+    }
+
+    public function test_content_should_be_cached_after_first_call(): void
+    {
+        $key = 'nomics-currencies';
+
+        $this->assertEmpty(Cache::get($key));
+
+        $this->json('get', route('nomics.currencies'));
+
+        $this->assertNotEmpty(Cache::get($key));
     }
 }

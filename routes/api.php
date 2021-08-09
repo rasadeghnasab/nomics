@@ -24,5 +24,5 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'nomics'], function () {
     Route::get('currencies', [NomicsController::class, 'currencies'])->name('nomics.currencies');
-    Route::get('currencies/rate', [NomicsController::class, 'currencyRate'])->name('nomics.currencies.rate');
+    Route::get('currencies/rate', [NomicsController::class, 'currencyDetail'])->name('nomics.currencies.rate');
 });

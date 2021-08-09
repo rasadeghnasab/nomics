@@ -2,6 +2,7 @@
 
 namespace App\Services\Nomics;
 
+use App\Services\Nomics\Interfaces\UrlableInterface;
 use Exception;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Collection;
@@ -10,51 +11,38 @@ use Illuminate\Support\Facades\Cache;
 
 class NomicsAPI
 {
-    private string $key;
+    private UrlableInterface $url;
 
-    public function __construct()
+    public function __construct(UrlableInterface $url)
     {
-        $this->key = config('nomics.key');
+        $this->url = $url;
     }
 
     public function allCurrencies(array $data): Collection
     {
-        $url = 'currencies';
+        $path = 'currencies';
 
         return Cache::remember(
             'nomics-currencies',
             24 * 60 * 60,
-            function () use ($url, $data): Collection {
-                return $this->get($url, $data);
+            function () use ($path, $data): Collection {
+                return $this->get($path, $data);
             }
         );
     }
 
-    public function currenciesTicker($data): Collection
+    public function currencyDetail($data): Collection
     {
         return $this->get('currencies/ticker', $data);
     }
 
-    private function makeUrl(string $url, array $parameters = []): string
+    private function get($path, $data = []): Collection
     {
-        $trimValues = '\t\n\r\0\x0B\/';
-
-        $apiUrl = rtrim(config('nomics.api_url'), $trimValues);
-        $url = ltrim($url, $trimValues);
-        $parameters['key'] = $parameters['key'] ?? $this->key;
-
-        $query_parameters = http_build_query($parameters);
-
-        return sprintf('%s/%s?%s', $apiUrl, $url, $query_parameters);
-    }
-
-    private function get($url, $data = []): Collection
-    {
-        $url = $this->makeUrl($url, $data);
+        $fulLUrl = $this->url->make($path, $data);
 
         $message = 'Something went wrong, please try again later.';
         try {
-            $response = Http::get($url);
+            $response = Http::get($fulLUrl);
 
             return $response->throw()->collect();
         } catch (RequestException $exception) {

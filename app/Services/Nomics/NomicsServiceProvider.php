@@ -27,9 +27,12 @@ class NomicsServiceProvider extends ServiceProvider
     public function boot()
     {
         // facade
-        $this->app->bind('nomics', function()
-        {
-            return new NomicsAPI;
+        $this->app->bind('nomics', function () {
+            $nomicsUrlHandler = (new NomicsUrlHandler())
+                ->setBaseUrl(config('nomics.api_url'))
+                ->setApiKey(config('nomics.key'));
+
+            return new NomicsAPI($nomicsUrlHandler);
         });
 
         // translation
