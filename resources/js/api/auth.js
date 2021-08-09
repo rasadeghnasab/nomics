@@ -1,6 +1,6 @@
 export default {
     login(data) {
-        return axios.post('login', data);
+        return axios.post('auth/login', data);
     },
 
     saveAuthorizedUser(token) {
@@ -8,7 +8,7 @@ export default {
     },
 
     logout() {
-        return axios.post('logout');
+        return axios.post('auth/logout');
     },
 
     clearAuthorizedUser() {

@@ -2496,13 +2496,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   login: function login(data) {
-    return axios.post('login', data);
+    return axios.post('auth/login', data);
   },
   saveAuthorizedUser: function saveAuthorizedUser(token) {
     localStorage.setItem('token', token);
   },
   logout: function logout() {
-    return axios.post('logout');
+    return axios.post('auth/logout');
   },
   clearAuthorizedUser: function clearAuthorizedUser() {
     localStorage.removeItem('token');
