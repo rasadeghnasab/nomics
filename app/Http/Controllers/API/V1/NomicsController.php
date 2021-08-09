@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Http\Requests\GetCurrenciesRateRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Nomics\Facades\Nomics;
 
@@ -21,7 +21,7 @@ class NomicsController extends Controller
         return response()->json($currencies);
     }
 
-    public function currencyRate(Request $request): JsonResponse
+    public function currencyRate(GetCurrenciesRateRequest $request): JsonResponse
     {
         $rate = Nomics::currenciesTicker([
             'ids' => $request->get('ids'),

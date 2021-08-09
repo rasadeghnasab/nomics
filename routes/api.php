@@ -16,11 +16,13 @@ use App\Http\Controllers\API\V1\AuthController;
 */
 
 //Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout']);
-Route::get('check', [AuthController::class, 'check']);
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('check', [AuthController::class, 'check']);
+});
 
 Route::group(['prefix' => 'nomics'], function () {
-    Route::get('currencies', [NomicsController::class, 'currencies']);
-    Route::get('currencies/rate', [NomicsController::class, 'currencyRate']);
+    Route::get('currencies', [NomicsController::class, 'currencies'])->name('nomics.currencies');
+    Route::get('currencies/rate', [NomicsController::class, 'currencyRate'])->name('nomics.currencies.rate');
 });
