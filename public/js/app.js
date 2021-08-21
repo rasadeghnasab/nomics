@@ -2341,12 +2341,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       selected: {},
-      items: []
+      items: [],
+      isLoading: true
     };
   },
   mounted: function mounted() {
@@ -2357,19 +2359,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return _this.getCurrencies();
+              _this.loadItems();
 
-            case 2:
-              _this.items = _context.sent.data;
-
-              if (_this.items.length) {
-                _this.selected = _this.items[0];
-
-                _this.changeSelectedCurrency();
-              }
-
-            case 4:
+            case 1:
             case "end":
               return _context.stop();
           }
@@ -2381,30 +2373,64 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     changeSelectedCurrency: function changeSelectedCurrency() {
       this.$emit('currencyChange', this.selected);
     },
-    getCurrencies: function () {
-      var _getCurrencies = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+    loadItems: function () {
+      var _loadItems = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.prev = 0;
+                this.isLoading = true;
                 _context2.next = 3;
-                return _api_nomics__WEBPACK_IMPORTED_MODULE_1__.default.currencies();
+                return this.getCurrencies();
 
               case 3:
-                return _context2.abrupt("return", _context2.sent);
+                this.items = _context2.sent;
+
+                if (this.items.length) {
+                  this.selected = this.items[0];
+                  this.changeSelectedCurrency();
+                }
+
+                this.isLoading = false;
 
               case 6:
-                _context2.prev = 6;
-                _context2.t0 = _context2["catch"](0);
-                alert('exception occurred');
-
-              case 9:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 6]]);
+        }, _callee2, this);
+      }));
+
+      function loadItems() {
+        return _loadItems.apply(this, arguments);
+      }
+
+      return loadItems;
+    }(),
+    getCurrencies: function () {
+      var _getCurrencies = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return _api_nomics__WEBPACK_IMPORTED_MODULE_1__.default.currencies();
+
+              case 3:
+                return _context3.abrupt("return", _context3.sent.data);
+
+              case 6:
+                _context3.prev = 6;
+                _context3.t0 = _context3["catch"](0);
+                alert('exception occurred');
+
+              case 9:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 6]]);
       }));
 
       function getCurrencies() {
@@ -42005,6 +42031,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("v-autocomplete", {
     attrs: {
+      loading: _vm.isLoading,
       items: _vm.items,
       "item-text": "name",
       "item-value": "id",

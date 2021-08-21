@@ -1,6 +1,7 @@
 <template>
     <v-autocomplete
         v-model="selected"
+        :loading="isLoading"
         :items="items"
         item-text="name"
         item-value="id"
@@ -19,23 +20,29 @@ export default {
         return {
             selected: {},
             items: [],
+            isLoading: true,
         }
     },
     async mounted() {
-        this.items = (await this.getCurrencies()).data;
-
-        if (this.items.length) {
-            this.selected = this.items[0];
-            this.changeSelectedCurrency();
-        }
+        this.loadItems();
     },
     methods: {
-        changeSelectedCurrency: function() {
+        changeSelectedCurrency: function () {
             this.$emit('currencyChange', this.selected);
+        },
+        loadItems: async function () {
+            this.isLoading = true;
+            this.items = await this.getCurrencies();
+
+            if (this.items.length) {
+                this.selected = this.items[0];
+                this.changeSelectedCurrency();
+            }
+            this.isLoading = false;
         },
         getCurrencies: async () => {
             try {
-                return await nomics.currencies();
+                return (await nomics.currencies()).data;
             } catch (exception) {
                 alert('exception occurred');
             }
