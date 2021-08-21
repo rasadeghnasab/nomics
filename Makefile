@@ -17,8 +17,8 @@ project: install
 
 install:
 	docker run --rm \
-	-u "$(id -u):$(id -g)" \
-	-v $(pwd):/opt \
+	-u "$(shell id -u):$(shell id -g)" \
+	-v $(shell pwd):/opt \
 	-w /opt \
 	laravelsail/php80-composer:latest \
 	composer install --ignore-platform-reqs
