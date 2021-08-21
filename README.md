@@ -12,29 +12,16 @@ You have to have `docker` and `docker-composer` installed on your machine in ord
 2. cd to the repository directory
     - `cd nomics
     
-3. up and run the whole project
+3. initialize the project
     - `make project` 
     - Note: You can use `sudo make project` if it gives you any permission error
 
+4. check databases to see if they are up or not using `make status`
+
+5. run the project after all the services are OK
+    - `make run`
+
 ---
-# Useful make commands
+# Clear all the containers
 
-Here we listed some useful commands that you can use to develop the application:
-
-### Docker commands
-- Run all the necessary containers to make project work and accessible through a URI and PORT
-    - `make up`
-    
-- Stop all the containers and free resources and ports
-    - `make down`
-
-### Back-end commands
-
-- Install laravel composer packages and create `.env` file from the `.env.example`
-    - `make laravel-dep`
-
-- Run all the tests
-    - `make test`
-    
-- You can run a specific test by passing the `filter` argument to the command
-    - `make test filter=TEST_FILE_OR_FUNCTION`
+run `make purge` to clear all the runing containers and data

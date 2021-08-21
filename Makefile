@@ -11,6 +11,9 @@ project: install
 	cp .env.example .env
 	$(SAIL) artisan optimize:clear
 	$(SAIL) artisan key:generate
+	$(SAIL) ps
+
+run:
 	$(SAIL) artisan migrate:refresh --seed
 	$(SAIL) artisan passport:install --force
 	@echo Visit: "${BOLD_GREEN} ${ADDRESS}"
@@ -22,6 +25,9 @@ install:
 	-w /opt \
 	laravelsail/php80-composer:latest \
 	composer install --ignore-platform-reqs
+
+status:
+	$(SAIL) ps
 
 dev:
 	$(SAIL) up
